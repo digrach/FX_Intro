@@ -2,11 +2,15 @@ package application;
 	
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
@@ -39,6 +43,15 @@ public class Main extends Application {
 			topPane.setPrefSize(sceneWidth, topBottHeight);
 			topPane.setStyle("-fx-background-color: #336699;-fx-border-color: rgb(0, 0, 0);-fx-border-radius: 0;");
 			Button btnTop = new Button("top");
+			btnTop.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					System.out.println("The mouse clicked the button");
+					
+				}
+				
+			});
 			topPane.getChildren().add(btnTop);
 			root.setTop(topPane);
 			
@@ -79,6 +92,17 @@ public class Main extends Application {
 			
 			// Set the root layout of the scene.
 			Scene scene = new Scene(root,sceneWidth,sceneHeight);
+			
+			rightPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+				@Override
+				public void handle(KeyEvent ke) {
+					if (ke.getCode() == KeyCode.SPACE) {
+						System.out.println("The space bar was pressed");
+					} 
+				}
+			});
+
+			
 			// Default styling of the scene.
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			// Set the stage's scene.
